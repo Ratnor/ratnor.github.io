@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ratna Emani — Software Engineer</title>
+  <meta name="description" content="Ratna Emani — Application Engineer at CIBC, building AI systems to transform how development teams work." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:          #0b0907;
+      --bg2:         #110e0b;
+      --bg3:         #181310;
+      --border:      rgba(255,255,255,0.07);
+      --orange:      #d4692a;
+      --orange-mid:  #e07830;
+      --orange-dim:  rgba(212,105,42,0.14);
+      --orange-glow: rgba(212,105,42,0.05);
+      --text:        #ede8e0;
+      --text-mid:    #9e9287;
+      --text-dim:    #574f47;
+      --mono:        'JetBrains Mono', monospace;
+      --serif:       'Cormorant Garamond', serif;
+      --sans:        'Syne', sans-serif;
+      --gap:         clamp(4.5rem, 9vw, 10rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: clamp(15px, 1.05vw, 17px);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* film grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
+    section { padding: var(--gap) 0; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.4rem clamp(1.5rem, 5vw, 4rem);
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(11,9,7,0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
+      letter-spacing: 0.04em; color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.73rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-mid); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh; display: flex; flex-direction: column;
+      justify-content: flex-end; padding-top: 6rem; padding-bottom: 5rem;
+      position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: ''; position: absolute; top: -5%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle, rgba(212,105,42,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 300;
+      letter-spacing: 0.22em; color: var(--orange); text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(4.5rem, 11vw, 11rem);
+      font-weight: 300; line-height: 0.92; letter-spacing: -0.01em;
+      opacity: 0; animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--orange); }
+
+    .hero-tagline {
+      margin-top: 2.2rem; max-width: 540px;
+      font-size: clamp(0.93rem, 1.25vw, 1.08rem);
+      color: var(--text-mid); line-height: 1.7;
+      opacity: 0; animation: fadeUp 0.9s 0.65s ease forwards;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 600; }
+
+    .hero-actions {
+      margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 0.85s ease forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--sans); font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; padding: 0.85rem 1.9rem;
+      border-radius: 2px; transition: all 0.22s ease; border: none; cursor: pointer;
+    }
+    .btn-primary { background: var(--orange); color: #0b0907; }
+    .btn-primary:hover { background: var(--orange-mid); }
+    .btn-ghost { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.18); }
+
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: clamp(1.5rem, 5vw, 4rem);
+      display: flex; align-items: center; gap: 0.8rem;
+      opacity: 0; animation: fadeUp 1s 1.2s ease forwards;
+    }
+    .scroll-hint span {
+      font-family: var(--mono); font-size: 0.63rem;
+      letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase;
+    }
+    .scroll-line { width: 40px; height: 1px; background: linear-gradient(90deg, var(--orange), transparent); }
+
+    /* ── SECTION HEADER ── */
+    .section-label {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 300;
+      letter-spacing: 0.2em; color: var(--orange); text-transform: uppercase;
+      margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before {
+      content: ''; display: inline-block; width: 22px; height: 1px;
+      background: var(--orange); opacity: 0.6;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 3.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--orange); }
+
+    /* ── WORK ── */
+    .projects-grid { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); }
+
+    .project-card {
+      display: grid; grid-template-columns: 3.5rem 1fr;
+      align-items: start; gap: 0 2rem; padding: 2.5rem 2rem;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      transition: background 0.25s; position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: var(--orange); transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover::before { transform: scaleY(1); }
+    .project-card:hover { background: var(--bg3); }
+    .project-card:last-child { border-bottom: none; }
+
+    .project-num {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 300;
+      color: var(--text-dim); padding-top: 0.25rem;
+    }
+    .project-header { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .project-name { font-family: var(--serif); font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400; color: var(--text); }
+
+    .project-tag {
+      font-family: var(--mono); font-size: 0.61rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.65rem; border-radius: 2px; border: 1px solid var(--border); color: var(--text-dim);
+    }
+    .tag-live  { border-color: rgba(212,105,42,0.4); color: var(--orange); }
+    .tag-poc   { border-color: rgba(140,185,140,0.3); color: #8aba8a; }
+    .tag-dev   { border-color: rgba(120,150,200,0.3); color: #90aad4; }
+
+    .project-desc { color: var(--text-mid); font-size: 0.91rem; line-height: 1.72; max-width: 620px; }
+
+    .project-stack { margin-top: 1.1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .chip {
+      font-family: var(--mono); font-size: 0.61rem; padding: 0.2rem 0.6rem;
+      background: var(--orange-dim); color: var(--orange); border-radius: 1px;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+    .about-text p { color: var(--text-mid); margin-bottom: 1.2rem; font-size: 0.96rem; }
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item {
+      display: grid; grid-template-columns: 5.5rem 1fr; gap: 0 1.5rem;
+      padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-year { font-family: var(--mono); font-size: 0.7rem; font-weight: 300; color: var(--text-dim); padding-top: 0.15rem; }
+    .tl-year span { display: block; font-size: 0.6rem; margin-top: 0.2rem; color: var(--orange); }
+    .tl-role { font-family: var(--sans); font-weight: 600; font-size: 0.88rem; color: var(--text); margin-bottom: 0.2rem; }
+    .tl-org  { font-size: 0.81rem; color: var(--text-mid); }
+
+    .skills-row { margin-top: 2.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .skill-pill {
+      font-family: var(--mono); font-size: 0.67rem; letter-spacing: 0.05em;
+      padding: 0.38rem 0.9rem; border: 1px solid var(--border); color: var(--text-mid);
+      border-radius: 1px; transition: all 0.2s;
+    }
+    .skill-pill:hover { border-color: rgba(212,105,42,0.4); color: var(--orange); }
+
+    .edu-block {
+      margin-top: 2.8rem; display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .edu-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.1rem 1.4rem; border: 1px solid var(--border); background: var(--bg3);
+    }
+    .edu-icon {
+      width: 32px; height: 32px; min-width: 32px;
+      background: var(--orange-dim); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+    }
+    .edu-title { font-size: 0.84rem; font-weight: 600; color: var(--text); }
+    .edu-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.15rem; }
+
+    /* ── PHOTOGRAPHY ── */
+    #lens { background: var(--bg); }
+
+    .photo-intro {
+      font-size: 0.93rem; color: var(--text-mid); max-width: 480px;
+      margin-bottom: 3rem; line-height: 1.65;
+    }
+
+    /* 7-photo asymmetric grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 220px;
+      gap: 6px;
+    }
+
+    /* Row 1 */
+    .photo-cell:nth-child(1) { grid-column: 1 / 8;  grid-row: 1 / 3; } /* tall wide: aerial coast */
+    .photo-cell:nth-child(2) { grid-column: 8 / 10; grid-row: 1 / 2; } /* portrait: silhouette */
+    .photo-cell:nth-child(3) { grid-column: 10/ 13; grid-row: 1 / 2; } /* square: café */
+    /* Row 2 */
+    .photo-cell:nth-child(4) { grid-column: 8 / 10; grid-row: 2 / 3; } /* moon */
+    .photo-cell:nth-child(5) { grid-column: 10/ 13; grid-row: 2 / 3; } /* lake como */
+    /* Row 3 */
+    .photo-cell:nth-child(6) { grid-column: 1 / 7;  grid-row: 3 / 4; } /* wide sunset */
+    .photo-cell:nth-child(7) { grid-column: 7 / 13; grid-row: 3 / 4; } /* bubbles */
+
+    .photo-cell {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: var(--bg3);
+    }
+    .photo-cell img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .photo-cell:hover img { transform: scale(1.05); }
+
+    .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,9,7,0.75) 0%, transparent 55%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 1.2rem 1.4rem;
+    }
+    .photo-cell:hover .photo-overlay { opacity: 1; }
+    .photo-caption {
+      font-family: var(--serif); font-style: italic;
+      font-size: 0.9rem; color: rgba(237,232,224,0.88); line-height: 1.3;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); border-top: 1px solid var(--border); }
+
+    .contact-inner { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 3rem; }
+    .contact-heading {
+      font-family: var(--serif); font-size: clamp(2.8rem, 6.5vw, 6rem);
+      font-weight: 300; line-height: 1.05;
+    }
+    .contact-heading em { font-style: italic; color: var(--orange); }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.85rem; align-items: flex-end; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-family: var(--mono); font-size: 0.71rem; letter-spacing: 0.08em;
+      color: var(--text-mid); text-decoration: none; transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--orange); }
+    .cl-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-dim); transition: background 0.2s; }
+    .contact-link:hover .cl-dot { background: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.8rem clamp(1.5rem, 5vw, 4rem);
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy { font-family: var(--mono); font-size: 0.66rem; color: var(--text-dim); letter-spacing: 0.08em; }
+    .footer-copy span { color: var(--orange); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-links { display: none; }
+      .photo-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 180px;
+      }
+      .photo-cell:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 2; }
+      .photo-cell:nth-child(2) { grid-column: 1 / 2; grid-row: 2 / 3; }
+      .photo-cell:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
+      .photo-cell:nth-child(4) { grid-column: 1 / 2; grid-row: 3 / 4; }
+      .photo-cell:nth-child(5) { grid-column: 2 / 3; grid-row: 3 / 4; }
+      .photo-cell:nth-child(6) { grid-column: 1 / 3; grid-row: 4 / 5; }
+      .photo-cell:nth-child(7) { grid-column: 1 / 3; grid-row: 5 / 6; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .contact-links { align-items: flex-start; }
+    }
+    @media (max-width: 520px) {
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-cell:nth-child(n) { grid-column: 1; grid-row: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">R<span>.</span>E</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#lens">Photography</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow">API Developer · AI Systems · Oakville, ON</p>
+    <h1 class="hero-name">Ratna<br /><em>Emani</em></h1>
+    <p class="hero-tagline">
+      I'm an <strong>application engineer and API developer</strong> at CIBC
+      who has spent the last few years building AI systems to change how
+      development teams actually work — from multi-agent tooling to
+      knowledge pipelines, inside one of Canada's most regulated environments.
+    </p>
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-primary">See My Work</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="section-title reveal">Things I've <em>Built</em></h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <span class="project-num">01</span>
+        <div class="project-body">
+          <div class="project-header">
+            <h3 class="project-name">Multi-Agent Developer Tooling</h3>
+            <span class="project-tag tag-live">Live · CIBC</span>
+          </div>
+          <p class="project-desc">
+            A system of four coordinated AI agents that transforms how the engineering team
+            handles daily work. An <strong style="color:var(--text)">API Knowledge Extractor</strong> converts source code into
+            shared JSON and Markdown manifests — a living knowledge layer the whole team builds on.
+            A <strong style="color:var(--text)">PR Review Agent</strong> pulls Confluence, Jira, and GitHub context
+            to produce structured approve/flag summaries, cutting routine review time by 50%+.
+            A <strong style="color:var(--text)">Release Management Agent</strong> monitors the full release lifecycle.
+            An <strong style="color:var(--text)">API Modification Agent</strong> handles defined change workflows.
+            All built within strict banking compliance constraints — no external model access.
+          </p>
+          <div class="project-stack">
+            <span class="chip">Python</span>
+            <span class="chip">GitHub MCP</span>
+            <span class="chip">Jira MCP</span>
+            <span class="chip">Confluence MCP</span>
+            <span class="chip">VS Code Copilot</span>
+            <span class="chip">Light4J</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-num">02</span>
+        <div class="project-body">
+          <div class="project-header">
+            <h3 class="project-name">RAG Pipeline — API Documentation</h3>
+            <span class="project-tag tag-poc">Proof of Concept</span>
+          </div>
+          <p class="project-desc">
+            Built locally to validate the approach: embeddings and vector search over a corpus of
+            internal API documentation, enabling natural-language queries over specs that were
+            previously only navigable by reading source. The constraint at CIBC is access to
+            external embedding models — this PoC proves the concept works and defines the
+            architecture for when that gap closes.
+          </p>
+          <div class="project-stack">
+            <span class="chip">Python</span>
+            <span class="chip">Embeddings</span>
+            <span class="chip">Vector Search</span>
+            <span class="chip">RAG Architecture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-num">03</span>
+        <div class="project-body">
+          <div class="project-header">
+            <h3 class="project-name">Personal Finance AI System</h3>
+            <span class="project-tag tag-dev">In Development</span>
+          </div>
+          <p class="project-desc">
+            A net worth tracker and investment advisory helper that gives AI models
+            persistent financial context — so decisions are made with the full picture
+            across sessions, not just what's shared in a single prompt. Ingests financial
+            statements and converts them into structured metadata tracking net worth,
+            debt, investments, and savings over time.
+          </p>
+          <div class="project-stack">
+            <span class="chip">Python</span>
+            <span class="chip">Structured Data</span>
+            <span class="chip">LLM Integration</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-num">04</span>
+        <div class="project-body">
+          <div class="project-header">
+            <h3 class="project-name">Connected Retail 360 — IoT Prototype</h3>
+            <span class="project-tag tag-live">Delivered · Bell / CGI</span>
+          </div>
+          <p class="project-desc">
+            Designed and built an IoT prototype for Bell's Business Unit IoT Centre of
+            Excellence, with architecture reviewed by Azure Architects. Raspberry Pi 4
+            with ultrasonic sensors and Electronic Shelf Labels pushing real-time telemetry
+            to Azure IoT Hub — processed through Azure Functions, stored in CosmosDB,
+            and visualised in PowerBI.
+          </p>
+          <div class="project-stack">
+            <span class="chip">Azure IoT Hub</span>
+            <span class="chip">Azure Functions</span>
+            <span class="chip">CosmosDB</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">Raspberry Pi</span>
+            <span class="chip">PowerBI</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <p class="section-label reveal">Background</p>
+    <h2 class="section-title reveal">The work,<br /><em>in context</em></h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm an application engineer and API developer at CIBC, where I've spent
+          five years building and maintaining API infrastructure — and the last two
+          years rethinking what that work looks like when you hand parts of it to AI.
+        </p>
+        <p>
+          My current focus is building <strong>AI systems that make the development
+          team more effective</strong>: agents that automate the repetitive overhead of
+          API work, knowledge pipelines that surface context instantly, and tooling
+          that reduces the cost of high-quality code review. Working inside a Big-5
+          bank means doing this with strict governance and no access to external models —
+          which turns out to be a more honest proving ground than most.
+        </p>
+        <p>
+          Before CIBC I worked across IoT infrastructure at Bell and e-commerce
+          front-end at The Source via CGI — and briefly served as CIO of a startup,
+          which taught me more about real architectural trade-offs than any textbook.
+        </p>
+
+        <div class="skills-row">
+          <span class="skill-pill">API Design</span>
+          <span class="skill-pill">Multi-Agent Systems</span>
+          <span class="skill-pill">RAG Pipelines</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Light4J</span>
+          <span class="skill-pill">Azure</span>
+          <span class="skill-pill">MCP</span>
+          <span class="skill-pill">Regulated Environments</span>
+          <span class="skill-pill">Developer Tooling</span>
+        </div>
+
+        <div class="edu-block">
+          <div class="edu-item">
+            <div class="edu-icon">🎓</div>
+            <div>
+              <div class="edu-title">Bachelor of Engineering — Dean's Honour List</div>
+              <div class="edu-sub">McMaster University · Graduated 2019</div>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon">📖</div>
+            <div>
+              <div class="edu-title">Certificate in Artificial Intelligence</div>
+              <div class="edu-sub">University of Toronto · School of Continuing Studies · In Progress</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2021 – Now<span>5 years</span></div>
+            <div class="tl-body">
+              <div class="tl-role">Consultant, Application Development</div>
+              <div class="tl-org">CIBC · API & Application Engineering</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2019 – 2021</div>
+            <div class="tl-body">
+              <div class="tl-role">Full-Stack Developer</div>
+              <div class="tl-org">CGI · Bell · The Source</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2019 – 2021</div>
+            <div class="tl-body">
+              <div class="tl-role">CIO (part-time)</div>
+              <div class="tl-org">MC Master of Ceremony</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024 – Now</div>
+            <div class="tl-body">
+              <div class="tl-role">AI Certificate — In Progress</div>
+              <div class="tl-org">University of Toronto · SCS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOGRAPHY -->
+<section id="lens">
+  <div class="wrap">
+    <p class="section-label reveal">Through the Lens</p>
+    <h2 class="section-title reveal">Places. <em>Moments.</em></h2>
+    <p class="photo-intro reveal">
+      Away from the keyboard — landscape, street, and travel photography.
+      Italy, Mexico, and wherever the light is interesting.
+    </p>
+
+    <div class="photo-grid">
+
+      <!-- Cell 1: wide tall — aerial coastal dusk (Mexico) -->
+      <div class="photo-cell reveal">
+        <img src="IMG%209302.jpeg" alt="Aerial view of a coastal town at dusk, Mexico" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Pacific Coast at dusk</span>
+        </div>
+      </div>
+
+      <!-- Cell 2 — silhouette crowd at golden hour -->
+      <div class="photo-cell reveal">
+        <img src="DSCF1399.jpeg" alt="Silhouettes of a crowd at golden hour" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Golden hour crowd</span>
+        </div>
+      </div>
+
+      <!-- Cell 3 — café barman, Rome -->
+      <div class="photo-cell reveal">
+        <img src="DSCF1301.jpeg" alt="Barman at work, Rome" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Roman café</span>
+        </div>
+      </div>
+
+      <!-- Cell 4 — moon -->
+      <div class="photo-cell reveal">
+        <img src="100%200857.jpeg" alt="Full moon rising, amber and orange" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Full moon rising</span>
+        </div>
+      </div>
+
+      <!-- Cell 5 — Lake Como -->
+      <div class="photo-cell reveal">
+        <img src="verrena1merge.jpeg" alt="Lake Como village at blue hour, Italy" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Lake Como, Italy</span>
+        </div>
+      </div>
+
+      <!-- Cell 6: wide — aerial sunset Mexico -->
+      <div class="photo-cell reveal">
+        <img src="IMG%209328.jpeg" alt="Aerial sunset over Pacific coast hillside, Mexico" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Pacific sunset</span>
+        </div>
+      </div>
+
+      <!-- Cell 7: wide — bubbles in piazza -->
+      <div class="photo-cell reveal">
+        <img src="DSCF1329.jpeg" alt="Child laughing among soap bubbles in a Roman piazza" loading="lazy" />
+        <div class="photo-overlay">
+          <span class="photo-caption">Rome, Piazza Navona</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <h2 class="contact-heading reveal">
+        Let's<br /><em>talk.</em>
+      </h2>
+      <div class="contact-links reveal">
+        <a href="https://linkedin.com/in/ratnaemani" class="contact-link" target="_blank" rel="noopener">
+          <span class="cl-dot"></span>LinkedIn
+        </a>
+        <a href="https://github.com/Ratnor" class="contact-link" target="_blank" rel="noopener">
+          <span class="cl-dot"></span>GitHub
+        </a>
+        <a href="mailto:your@email.com" class="contact-link">
+          <span class="cl-dot"></span>Email
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 <span>Ratna Emani</span> — Oakville, ON</p>
+  <p class="footer-copy">Built with intention, not a template.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = Array.from(entry.target.parentElement.querySelectorAll('.reveal'));
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 55);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--orange)' : '';
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
