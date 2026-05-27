@@ -208,7 +208,8 @@
 
     .timeline { display: flex; flex-direction: column; }
     .tl-item {
-      display: grid; grid-template-columns: 5.5rem 1fr; gap: 0 1.5rem;
+      display: grid; grid-template-columns: 5.5rem 2rem 1fr; gap: 0 1rem;
+      align-items: start;
       padding: 1.5rem 0; border-bottom: 1px solid var(--border);
     }
     .tl-item:last-child { border-bottom: none; }
@@ -229,14 +230,27 @@
       margin-top: 2.8rem; display: flex; flex-direction: column; gap: 0.8rem;
     }
     .edu-item {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1.1rem 1.4rem; border: 1px solid var(--border); background: var(--bg3);
+      display: flex; align-items: center; gap: 1.1rem;
+      padding: 1rem 1.4rem; border: 1px solid var(--border); background: var(--bg3);
+      transition: border-color 0.2s;
     }
-    .edu-icon {
-      width: 32px; height: 32px; min-width: 32px;
-      background: var(--orange-dim); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+    .edu-item:hover { border-color: rgba(212,105,42,0.3); }
+    .logo-chip {
+      width: 44px; height: 44px; min-width: 44px;
+      background: rgba(255,255,255,0.93);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 5px; overflow: hidden; flex-shrink: 0;
     }
+    .logo-chip img, .logo-chip svg { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .tl-logo {
+      width: 30px; height: 30px; min-width: 30px;
+      background: rgba(255,255,255,0.93);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 4px; overflow: hidden; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .tl-logo img, .tl-logo svg { width: 100%; height: 100%; object-fit: contain; display: block; }
     .edu-title { font-size: 0.84rem; font-weight: 600; color: var(--text); }
     .edu-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 0.15rem; }
 
@@ -537,14 +551,18 @@
 
         <div class="edu-block">
           <div class="edu-item">
-            <div class="edu-icon">🎓</div>
+            <div class="logo-chip">
+              <img src="logos/mcmaster.png" alt="McMaster University" />
+            </div>
             <div>
               <div class="edu-title">Bachelor of Engineering — Dean's Honour List</div>
               <div class="edu-sub">McMaster University · Graduated 2019</div>
             </div>
           </div>
           <div class="edu-item">
-            <div class="edu-icon">📖</div>
+            <div class="logo-chip">
+              <img src="logos/uoft.svg" alt="University of Toronto" />
+            </div>
             <div>
               <div class="edu-title">Certificate in Artificial Intelligence</div>
               <div class="edu-sub">University of Toronto · School of Continuing Studies · In Progress</div>
@@ -557,6 +575,7 @@
         <div class="timeline">
           <div class="tl-item">
             <div class="tl-year">2021 – Now<span>5 years</span></div>
+            <div class="tl-logo"><img src="logos/cibc.svg" alt="CIBC" /></div>
             <div class="tl-body">
               <div class="tl-role">Consultant, Application Development</div>
               <div class="tl-org">CIBC · API & Application Engineering</div>
@@ -564,6 +583,10 @@
           </div>
           <div class="tl-item">
             <div class="tl-year">2019 – 2021</div>
+            <div class="tl-logo" style="display:flex;flex-direction:column;gap:3px;">
+              <div class="tl-logo" style="width:28px;height:14px;padding:2px;background:rgba(255,255,255,0.93);border-radius:3px;"><img src="logos/cgi.png" alt="CGI" style="width:100%;height:100%;object-fit:contain;" /></div>
+              <div class="tl-logo" style="width:28px;height:14px;padding:2px;background:rgba(255,255,255,0.93);border-radius:3px;"><img src="logos/bell.svg" alt="Bell" style="width:100%;height:100%;object-fit:contain;" /></div>
+            </div>
             <div class="tl-body">
               <div class="tl-role">Full-Stack Developer</div>
               <div class="tl-org">CGI · Bell · The Source</div>
@@ -571,6 +594,7 @@
           </div>
           <div class="tl-item">
             <div class="tl-year">2019 – 2021</div>
+            <div class="tl-logo"><img src="logos/mc.svg" alt="MC Master of Ceremony" /></div>
             <div class="tl-body">
               <div class="tl-role">CIO (part-time)</div>
               <div class="tl-org">MC Master of Ceremony</div>
@@ -578,6 +602,7 @@
           </div>
           <div class="tl-item">
             <div class="tl-year">2024 – Now</div>
+            <div class="tl-logo"><img src="logos/uoft.svg" alt="University of Toronto" /></div>
             <div class="tl-body">
               <div class="tl-role">AI Certificate — In Progress</div>
               <div class="tl-org">University of Toronto · SCS</div>
